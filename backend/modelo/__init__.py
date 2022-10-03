@@ -1,0 +1,1 @@
+__all__ = ["professor", "aluno", "pessoa", "turma", "instrumento", "agenda"]
