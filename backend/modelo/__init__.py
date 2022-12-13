@@ -1,1 +1,1 @@
-__all__ = ["professor", "aluno", "pessoa", "turma", "instrumento", "agenda"]
+__all__ = ["professor", "aluno", "pessoa", "musica", "autor", "turma", "instrumento", "agenda"]
