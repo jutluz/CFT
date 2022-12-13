@@ -3,7 +3,7 @@ from modelo import *
 from rotas import *
 
 @app.route("/")
-def inicio():
+def padrao():
     return "Backend operando."
 
-app.run(debug=True)
+app.run(debug=True, host="0.0.0.0")
