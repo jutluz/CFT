@@ -1,0 +1,16 @@
+*{
+    padding: 0px;
+    margin: 0px;
+  }
+
+  body{
+    font-family: arial;
+    background: url(https://picstatio.com/large/2595e0/minimal-equilizer-music-artwork.jpg);
+    background-size: 100%;
+  }
+  
+  h1{
+    color: #C25100;
+    font-family: 'Lobster';
+    text-align: center;
+  }
