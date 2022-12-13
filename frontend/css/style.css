@@ -14,3 +14,10 @@
     font-family: 'Lobster';
     text-align: center;
   }
+
+  p {
+    text-indent: 300ch;
+    color: #381700;
+    text-align: justify;
+    margin: 100px 100px 10px 70px;
+  }
