@@ -1,24 +1,77 @@
-from geral.config import *
-from modelo.pessoa import *
-from modelo.professor import *
-from modelo.aluno import *
-from modelo.turma import *
-from modelo.instrumento import *
-from modelo.agenda import *
+from importacoes import *
+from geral.cripto import *
+
+def addProfessor():
+    #p1 = Professor(nome = "Laura", email = "lauraprof@gmail.com", senha = "lauraprof123")
+    #p2 = Professor(nome = "Jorge", email = "jorgeprof@gmail.com", senha = "jorgeprof123")
+    p3 = Professor(nome = "Akemi", email = "akemiprof@gmail.com", senha = cifrar("akemiprof123")) 
+    #db.session.add(p1)
+    #db.session.add(p2)
+    db.session.add(p3)
+    db.session.commit()
+    #print(p1) - retorna <Professor 1>
+    #print(p1.json()) - retorna {'idProf': 1, 'nomeProf': 'Laura', 'email': 'lauraprof@gmail.com', 'senha': 'lauraprof123'}
+    #print(p1.json())
+    print("Professores adicionados")
+
+def addAluno():
+    a1 = Aluno(nome = "Catarina", email = "catarinaaluna@gmail.com", senha = cifrar("cata123"))
+    a2 = Aluno(nome = "Fernanda", email = "fernandaaluna@gmail.com", senha = cifrar("fefe123"))
+    db.session.add(a1)
+    db.session.add(a2)
+    db.session.commit()
+    print("Alunos adicionados")
+
+def addAutor():
+    au1 = Autor(nome = "Gorillaz")
+    au2 = Autor(nome = "Mac DeMarco")       
+    db.session.add(au1)
+    db.session.add(au2)
+    db.session.commit()
+    print("Autores adicionados")
+
+#não tem como criar musica sem autor por conta da agregação de composição
+def addMusicaAutor():
+    au3 = Autor(nome = "Suki Waterhouse")
+    m1 = Musica(nome = "My Good Looking Boy", autor=au3)
+    db.session.add(au3)
+    db.session.add(m1)
+    db.session.commit()
+    #print(m1.json())
+    print("Musica e autor adicionados")
+
+def addTurmaInstrumento():
+    t1 = Turma(ano = "2022", semestre = "1")
+    db.session.add(t1)
+    db.session.commit()
+
+    i1 = Instrumento(nome = "Flauta", turma = t1)
+    db.session.add(i1)
+    db.session.commit()
+
+    i2 = Instrumento(nome = "Piano", turma = t1)
+    db.session.add(i2)
+    db.session.commit()
+
+    #print(t1.json(), i1.json(), i2.json())
+
+    print("Turma adicionada com seus instrumentos")
 
 def addAgendaTurmaInstrumentoPessoa():
-    #adicionando agendas
-    ag1 = Agenda(dia_semana = "segunda-feira", horario = 13.30)
+    ag1 = Agenda(dia_semana = "segunda-feira")
+    # horario = time(13,30,00)
     db.session.add(ag1)
     db.session.commit()
 
-    ag2 = Agenda(dia_semana = "terça-feira", horario = 14.15)
+    ag2 = Agenda(dia_semana = "quarta-feira")
+    # horario = time(13,30,00)
     db.session.add(ag2)
     db.session.commit()
+    
+    ''' %H: 24 horas (00 até 23)
+        %I: 12 horas (01 até 12)
+        %M: minutos (01 até 59)'''
 
-    print("Agendas adicionadas")
-
-    #adicionando turmas e instrumentos
     t1 = Turma(ano = "2021", semestre = "2", agenda = ag1)
     db.session.add(t1)
     db.session.commit()
@@ -35,7 +88,7 @@ def addAgendaTurmaInstrumentoPessoa():
     db.session.add(t2)
     db.session.commit()
 
-    i3 = Instrumento(nome = "Violão", turma = t2)
+    i3 = Instrumento(nome = "Violao", turma = t2)
     db.session.add(i3)
     db.session.commit()
 
@@ -45,32 +98,47 @@ def addAgendaTurmaInstrumentoPessoa():
 
     print("Turma adicionada com seus instrumentos")
 
-    #adicionando professores
-    p1 = Professor(nome = "Laura", email = "lauraprof@gmail.com", turma = t1, senha = "lauraprof123", salario = 2000.5)
-    p2 = Professor(nome = "Jorge", email = "jorgeprof@gmail.com", turma = t2, senha = "jorgeprof123", salario = 2000)
+    p1 = Professor(nome = "Laura", email = "lauraprof@gmail.com", turma = t1, senha = cifrar("lauraprof123"), salario = 2000.50)
+    p2 = Professor(nome = "Jorge", email = "jorgeprof@gmail.com", turma = t2, senha = cifrar("jorgeprof123"), salario = 2000) 
     db.session.add(p1)
     db.session.add(p2)
     db.session.commit()
     print("Professores adicionados")
 
-    #adicionando alunos
-    a1 = Aluno(nome = "Catarina", email = "catarinaaluna@gmail.com", turma = t1, senha = "cata123")
-    a2 = Aluno(nome = "Fernanda", email = "fernandaaluna@gmail.com", turma = t1, senha = "fefe123")
+    a1 = Aluno(nome = "Catarina", email = "catarinaaluna@gmail.com", turma = t1, senha = cifrar("cata123"))
+    a2 = Aluno(nome = "Fernanda", email = "fernandaaluna@gmail.com", turma = t1, senha = cifrar("fefe123"))
     db.session.add(a1)
     db.session.add(a2)
     db.session.commit()
     print("Alunos da turma 1 adicionados")
 
-    a3 = Aluno(nome = "Patolino", email = "patolino@gmail.com", turma = t2, senha = "patolinosenha")
-    a4 = Aluno(nome = "Pocoyo", email = "pocoyo@gmail.com", turma = t2, senha = "pocoyo321")
+    a3 = Aluno(nome = "Patolino", email = "patolino@gmail.com", turma = t2, senha = cifrar("patolinosenha"))
+    a4 = Aluno(nome = "Pocoyo", email = "pocoyo@gmail.com", turma = t2, senha = cifrar("pocoyo321"))
     db.session.add(a3)
     db.session.add(a4)
     db.session.commit()
     print("Alunos da turma 2 adicionados")
 
-    #mostrando a lista reversa
+    
 
-    print("\n", "Turma 1: ", t1.json(), "\n", "Instrumento 1: ", i1.json(), "\n", "Instrumento 2: ", i2.json())
-    print("\n", "Turma 2: ", t2.json(), "\n", "Instrumento 3: ", i3.json(), "\n", "Instrumento 4: ", i4.json())
+    '''
+    print("Turma e seus instrumentos: ", t1.json())
+    print("Objeto <Instrumento 1>: ", i1.json())
+    print("Objeto <Instrumento 2>: ", i2.json())
 
-addAgendaTurmaInstrumentoPessoa()
+    o comando acima imprime:
+
+    Turma e seus instrumentos:  {'id': 1, 'ano': 2021, 'semestre': 2, 'instrumentos': [<Instrumento 1>, <Instrumento 2>], 'agenda_id': 1, 'agenda': {'id': 1, 'dia_semana': 'segunda-feira', 'horario': 13.3}}
+    Objeto <Instrumento 1>:  {'id': 1, 'nome': 'Flauta', 'turma_id': 1}
+    Objeto <Instrumento 2>:  {'id': 2, 'nome': 'Piano', 'turma_id': 1}
+    
+    
+    print("Turma e seus instrumentos: ", t2.json(), "\n", i3.json(), "\n", i4.json())
+    '''
+
+#addProfessor()
+#addAluno()
+addAutor()
+addMusicaAutor()
+#addTurmaInstrumento()
+addAgendaTurmaInstrumentoPessoa() 
